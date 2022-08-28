@@ -1,4 +1,4 @@
-export * from './@antares_boy/t-ui'
+export * from './antares-ui'
 
-import * as ElementUI from './@antares_boy/t-ui'
-export default ElementUI
+import * as AntaresUI from './antares-ui'
+export default AntaresUI
