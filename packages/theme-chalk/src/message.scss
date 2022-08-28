@@ -1,0 +1,300 @@
+@import "mixins/mixins";
+@import "common/var";
+
+$--message-light-info-background:#E6F7FF !default;
+$--message-dark-info-background:#002766;
+
+$--message-light-success-background:#F0FFF1 !default;
+$--message-dark-success-background:#043818;
+
+$--message-light-warning-background:#FFF9E6 !default;
+$--message-dark-warning-background:#662E00;
+
+$--message-light-error-background:#FFF1F0 !default;
+$--message-dark-error-background: #3B000B;
+
+$--message-light-loading-background:#E6F7FF !default;
+$--message-dark-loading-background: #002766;
+
+$--message-light-font-color: #1F1F1F !default; 
+$--message-dark-font-color: #FFFFFF;
+$--message-icon-close-color:#595959 !default;
+
+
+@include b(message) {
+  position: fixed;
+  box-sizing: border-box;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s, transform .4s, top 0.4s;
+  flex-direction: row;
+  top: 40px;
+  min-height: $--message-min-height;
+  max-width: $--message-max-width;
+  box-shadow: $--message-box-shadow;
+  border-radius: 4px;
+  padding: 8px, 12px, 8px, 12px;
+  gap: 24px;
+
+  .el-message__content {
+    display: -webkit-box;         //将对象作为弹性伸缩盒子模型显示。
+		-webkit-box-orient: vertical; 
+		-webkit-line-clamp:2;   
+		overflow: hidden;             
+		text-overflow: ellipsis;
+    max-height: 44px;
+    max-width: 392px;
+    font-family: $--message-font-family;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    // color: $--message-light-font-color;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 8px 12px 8px 36px;
+
+    .dji-message-button{
+      width: 45px;
+      height: 22px;
+      font-family: $--message-font-family;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      text-align: center;
+      color: #1890FF;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      margin-right: 44px;
+      margin-left: 24px;
+      cursor: pointer;
+    }
+  }
+
+  &.is-light {
+    .el-message__content{
+      color: $--message-light-font-color;
+    }
+  }
+
+  &.is-dark {
+    .el-message__content{
+      color: $--message-dark-font-color;
+    }
+  }
+
+  .dji-icon-close {
+    position: absolute;
+    width: 14.67px;
+    height: 14.67px;
+    right: 13.3px;
+    top: 13.3px;
+    cursor: pointer;
+  }
+
+
+  @include when(center) {
+    justify-content: center;
+  }
+
+  @include when(closable) {
+    background-repeat: no-repeat;
+    .el-message__content {
+      padding-right:26px;
+    }
+
+    &.is-light {
+      .dji-icon-close{
+        color: $--message-icon-close-color;
+        background-image: url($dji-message-icon-close-light-path);
+      }
+    }
+
+    &.is-dark {
+      .dji-icon-close{
+        color: $--message-dark-font-color;
+        background-image: url($dji-message-icon-close-dark-path);
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+  @include m(success) {
+    &.is-light {
+      background-color: $--message-light-success-background;
+      border: 1px solid #31D158;
+    }
+
+    &.is-dark {
+      background-color: $--message-dark-success-background;
+      border: 1px solid #31D158;
+    }
+
+    .dji-message-button{
+      background-color: transparent;
+      opacity: 1;
+      border: $--message-light-success-background;
+    }
+  }
+
+  @include m(warning) {
+    &.is-light {
+      background-color: $--message-light-warning-background;
+      border: 1px solid #F29709;
+    }
+
+    &.is-dark {
+      background-color: $--message-dark-warning-background;
+      border: 1px solid #F29709;
+    }
+
+    .dji-message-button{
+      background-color: transparent;
+      opacity: 1;
+      border: $--message-light-warning-background;
+    }
+  }
+
+  @include m(info) {
+    &.is-light {
+      background-color: $--message-light-info-background;
+      border: 1px solid #1890FF;
+    }
+
+    &.is-dark {
+      background-color: $--message-dark-info-background;
+      border: 1px solid #1890FF;
+    }
+
+    .dji-message-button{
+      background-color: transparent;
+      opacity: 1;
+      border: $--message-light-info-background;
+    }
+  }
+
+  @include m(error) {
+
+    &.is-light {
+      background-color: $--message-light-error-background;
+      border: 1px solid #D32029;
+    }
+
+    &.is-dark {
+      background-color: $--message-dark-error-background;
+      border: 1px solid #D32029;
+    }
+
+    .dji-message-button{
+      background-color: transparent;
+      opacity: 1;
+      border: $--message-light-error-background;
+    }
+  }
+
+  
+  @include m(loading) {
+    &.is-light {
+      background-color: $--message-light-loading-background;
+      border: 1px solid #1890FF;
+    }
+
+    &.is-dark {
+      background-color: $--message-dark-loading-background;
+      border: 1px solid #1890FF;
+    }
+
+    .dji-message-button{
+      background-color: transparent;
+      opacity: 1;
+      border: $--message-light-loading-background;
+    }
+  }
+
+  @include e(icon) {
+    position: absolute;
+    height: 14.67px;
+    width: 14.67px;
+    left: 12.67px;
+    top:  11.67px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
+
+  // @include e(content) {
+  //   padding: 0;
+  //   font-size: 14px;
+  //   line-height: 1;
+  //   &:focus {
+  //     outline-width: 0;
+  //   }
+  // }
+
+  // @include e(closeBtn) {
+  //   position: absolute;
+  //   top: 50%;
+  //   right: 15px;
+  //   transform: translateY(-50%);
+  //   cursor: pointer;
+  //   color: $--message-close-icon-color;
+  //   font-size: $--message-close-size;
+
+  //   &:focus {
+  //     outline-width: 0;
+  //   }
+  //   &:hover {
+  //     color: $--message-close-hover-color;
+  //   }
+  // }
+ 
+  //  & .dji-message-dark-success {
+  //   background-color: $--message-dark-success-background;
+  //  }
+
+  & .el-icon-success {
+    color: #31D158;
+    background-image: url($dji-message-icon-success-path);
+    background-repeat: no-repeat;
+  }
+
+  & .el-icon-error {
+    color: #D32029;
+    background-image: url($dji-message-icon-error-path);
+    background-repeat: no-repeat;
+  }
+
+  & .el-icon-info {
+    // color: $--message-info-font-color;
+    color: #1890FF;
+    background-image: url($dji-message-icon-info-path);
+    background-repeat: no-repeat;
+  }
+
+
+  & .el-icon-warning {
+    // color: $--message-warning-font-color;
+    color: #F29709;
+    background-image: url($dji-message-icon-warning-path);
+    background-repeat: no-repeat;
+  }
+
+  & .el-icon-loading {
+    color: #1890FF;
+    background-color: url($dji-message-icon-loading-path);
+    background-repeat: no-repeat;
+  }
+}
+
+.el-message-fade-enter,
+.el-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}
